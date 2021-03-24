@@ -13,10 +13,14 @@ class Theater:
         return chr(ind + 65)
 
     def prevRow(self, reservationNo, row, col):
-        return row == 0 or self.seats[row - 1][col] == "" or self.seats[row - 1][col] == reservationNo
+        if row == 0:
+            return True
+        return self.seats[row - 1][col] == "" or self.seats[row - 1][col] == reservationNo
 
     def nextRow(self, reservationNo, row, col):
-        return row == self.rows - 1 or self.seats[row + 1][col] == "" or self.seats[row + 1][col] == reservationNo
+        if row == self.rows - 1:
+            return True
+        return self.seats[row + 1][col] == "" or self.seats[row + 1][col] == reservationNo
 
     def nextCols(self, reservationNo, row, col):
         if col >= self.cols - 3:
@@ -51,6 +55,7 @@ class Theater:
                         else:
                             self.resNoDict[reservationNo].append(self.indRow(r) + str(c+1))
                         self.seatsLeft[r] -= 1
+                        self.seatsAvailable -= 1
                         seatsToBook -= 1
                     c += 1
             r += 1
@@ -68,5 +73,5 @@ class Theater:
             else:
                 self.allocate(reservationNo, numLeft)
         reservedList = self.resNoDict.get(reservationNo, [])
-        reservedString = ",".join(reservedList)
-        return reservedString
+        #reservedString = ",".join(reservedList)
+        return reservedList

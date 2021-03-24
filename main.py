@@ -18,8 +18,9 @@ def main():
                 sortedLines .append((reservationNo, numRequested))
             sortedLines.sort(key = lambda x: x[1], reverse=True)
             for line in sortedLines:
-                outputString = movieTheater.book(line)
-                if (len(outputString) > 0):
+                outputList = movieTheater.book(line)
+                if (len(outputList) > 0):
+                    outputString = ",".join(outputList)
                     outputFile.write("%s %s\n" % (line[0], outputString))
             #print(movieTheater.seats)
             print("output.txt")
