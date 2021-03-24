@@ -7,8 +7,10 @@ def main():
         return
     try:
         with open(sys.argv[1], 'r') as inputFile:
-            line = inputFile.read().splitlines()
-            print(line)
+            outputFile = open("output.txt", 'w')
+            allLines = inputFile.read().splitlines()
+            for line in allLines:
+                outputFile.write(theater.book(line) + "\n")
     except FileNotFoundError:
         print("Input file %s does not exist" % sys.argv[1])
 
